@@ -12,7 +12,7 @@
 
 #include "experimental/rocm/context_wrapper.h"
 #include "experimental/rocm/direct_command_buffer.h"
-#include "experimental/rocm/dynamic_symbols.h"
+#include "experimental/rocm/rocm_dynamic_symbols.h"
 #include "experimental/rocm/event_semaphore.h"
 #include "experimental/rocm/nop_executable_cache.h"
 #include "experimental/rocm/pipeline_layout.h"

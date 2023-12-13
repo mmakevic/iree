@@ -10,7 +10,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include "experimental/rocm/dynamic_symbols.h"
+#include "experimental/rocm/rocm_dynamic_symbols.h"
 #include "experimental/rocm/native_executable.h"
 #include "experimental/rocm/pipeline_layout.h"
 #include "experimental/rocm/rocm_buffer.h"

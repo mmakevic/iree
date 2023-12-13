@@ -4,7 +4,7 @@
 // See https://llvm.org/LICENSE.txt for license information.
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-#include "experimental/rocm/dynamic_symbols.h"
+#include "experimental/rocm/rocm_dynamic_symbols.h"
 
 #include <iostream>
 

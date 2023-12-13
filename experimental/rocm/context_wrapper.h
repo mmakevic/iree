@@ -7,7 +7,7 @@
 #ifndef IREE_HAL_ROCM_CONTEXT_WRAPPER_H_
 #define IREE_HAL_ROCM_CONTEXT_WRAPPER_H_
 
-#include "experimental/rocm/dynamic_symbols.h"
+#include "experimental/rocm/rocm_dynamic_symbols.h"
 #include "experimental/rocm/rocm_headers.h"
 #include "iree/hal/api.h"
 

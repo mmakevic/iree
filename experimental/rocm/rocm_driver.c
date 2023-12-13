@@ -8,7 +8,7 @@
 #include <string.h>
 
 #include "experimental/rocm/api.h"
-#include "experimental/rocm/dynamic_symbols.h"
+#include "experimental/rocm/rocm_dynamic_symbols.h"
 #include "experimental/rocm/rocm_device.h"
 #include "experimental/rocm/status_util.h"
 #include "iree/base/api.h"

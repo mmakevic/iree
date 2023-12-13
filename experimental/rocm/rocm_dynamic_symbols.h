@@ -16,7 +16,7 @@ extern "C" {
 #endif  // __cplusplus
 
 // DynamicSymbols allow loading dynamically a subset of ROCM driver API. It
-// loads all the function declared in `dynamic_symbol_tables.def` and fail if
+// loads all the function declared in `rocm_dynamic_symbol_tables.def` and fail if
 // any of the symbol is not available. The functions signatures are matching
 // the declarations in `hipruntime.h`.
 typedef struct iree_hal_rocm_dynamic_symbols_t {
@@ -26,7 +26,7 @@ typedef struct iree_hal_rocm_dynamic_symbols_t {
   hipError_t (*rocmSymbolName)(__VA_ARGS__);
 #define RC_PFN_STR_DECL(rocmSymbolName, ...) \
   const char* (*rocmSymbolName)(__VA_ARGS__);
-#include "experimental/rocm/dynamic_symbol_tables.h"  // IWYU pragma: export
+#include "experimental/rocm/rocm_dynamic_symbol_tables.h"  // IWYU pragma: export
 #undef RC_PFN_DECL
 #undef RC_PFN_STR_DECL
 } iree_hal_rocm_dynamic_symbols_t;

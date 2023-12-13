@@ -8,7 +8,7 @@
 #define IREE_HAL_ROCM_DIRECT_COMMAND_BUFFER_H_
 
 #include "experimental/rocm/context_wrapper.h"
-#include "experimental/rocm/dynamic_symbols.h"
+#include "experimental/rocm/rocm_dynamic_symbols.h"
 #include "experimental/rocm/rocm_headers.h"
 #include "experimental/rocm/tracing.h"
 #include "iree/base/api.h"

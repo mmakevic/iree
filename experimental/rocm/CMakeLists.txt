@@ -89,12 +89,12 @@ iree_cc_library(
   NAME
     dynamic_symbols
   HDRS
-    "dynamic_symbols.h"
+    "rocm_dynamic_symbols.h"
   TEXTUAL_HDRS
-    "dynamic_symbol_tables.h"
+    "rocm_dynamic_symbol_tables.h"
   SRCS
     "rocm_headers.h"
-    "dynamic_symbols.c"
+    "rocm_dynamic_symbols.c"
   INCLUDES
     "${ROCM_HEADERS_API_ROOT}"
     "${CMAKE_CURRENT_LIST_DIR}/../.."
