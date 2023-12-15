@@ -90,11 +90,15 @@ iree_cc_library(
     dynamic_symbols
   HDRS
     "rocm_dynamic_symbols.h"
+    "rccl_dynamic_symbols.h"
   TEXTUAL_HDRS
     "rocm_dynamic_symbol_tables.h"
+    "rccl_dynamic_symbol_table.h"
   SRCS
     "rocm_headers.h"
     "rocm_dynamic_symbols.c"
+    "rccl_headers.h"
+    "rccl_dynamic_symbols.c"
   INCLUDES
     "${ROCM_HEADERS_API_ROOT}"
     "${CMAKE_CURRENT_LIST_DIR}/../.."
@@ -103,6 +107,7 @@ iree_cc_library(
   DEPS
     iree::base
     iree::base::internal::dynamic_library
+    rccl::headers
   PUBLIC
 )
 
