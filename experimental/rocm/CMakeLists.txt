@@ -32,6 +32,10 @@ if(NOT EXISTS "${ROCM_HEADERS_API_ROOT}/hip/hip_version.h")
   message(SEND_ERROR "Could not find HIP headers at: ${ROCM_HEADERS_API_ROOT}")
 endif()
 
+if(NOT DEFINED RCCL_HEADERS_API_ROOT)
+  set(RCCL_HEADERS_API_ROOT "${IREE_SOURCE_DIR}/third_party/rccl")
+endif()
+
 iree_cc_library(
   NAME
     rocm
@@ -101,13 +105,13 @@ iree_cc_library(
     "rccl_dynamic_symbols.c"
   INCLUDES
     "${ROCM_HEADERS_API_ROOT}"
+    "${RCCL_HEADERS_API_ROOT}"
     "${CMAKE_CURRENT_LIST_DIR}/../.."
   COPTS
     "-D__HIP_PLATFORM_HCC__=1"
   DEPS
     iree::base
     iree::base::internal::dynamic_library
-    rccl::headers
   PUBLIC
 )
 
