@@ -24,43 +24,45 @@ static const char* RCCLLoaderSearchNames[] = {
 };
 
 static iree_status_t iree_hal_rocm_rccl_check_version(
-    iree_dynamic_library_t* rccl_library){
-    ncclResult_t (*ncclGetVersion)(int*) = NULL;
+  iree_dynamic_library_t* rccl_library) {
+  ncclResult_t (*ncclGetVersion)(int*) = NULL;
 
-    iree_status_t status = iree_dynamic_library_lookup_symbol(
-        rccl_library, "ncclGetVersion", (void**)&ncclGetVersion);
-    if(!iree_status_is_ok(status)) {
-        iree_status_ignore(status);
-        return iree_make_status(
-            IREE_STATUS_UNAVAILABLE,
-            "ncclGetVersion symbol not found in dynamic library");
-    }
-
-    int rccl_version;
-    ncclResult_t result = ncclGetVersion(&rccl_version);
-    if(result != ncclSuccess) {
-        return iree_make_status(IREE_STATUS_UNAVAILABLE,
-                            "ncclGetVersion() failed with error %d", result);
-    }
-
-    int major = 0;
-    int minor = 0;
-    int patch = 0;
-    if (rccl_version < 20000) {
-      major = rccl_version / 1000;
-      minor = (rccl_version % 1000) / 100;
-    } else {
-      major = rccl_version / 10000;
-      minor = (rccl_version % 10000) / 100;
-    }
-    patch = rccl_version % 100;
-    int required_minimum_version = NCCL_VERSION(NCCL_MAJOR, NCCL_MINOR, 0);
-    if (major != NCCL_MAJOR || rccl_version < required_minimum_version) {
+  iree_status_t status = iree_dynamic_library_lookup_symbol(
+      rccl_library, "ncclGetVersion", (void**)&ncclGetVersion);
+  if(!iree_status_is_ok(status)) {
+      iree_status_ignore(status);
       return iree_make_status(
           IREE_STATUS_UNAVAILABLE,
-          "NCCL version is %d.%d.%d, but >=%d.%d and <%d is required", major,
-          minor, patch, NCCL_MAJOR, NCCL_MINOR, NCCL_MAJOR + 1);
-    }
+          "ncclGetVersion symbol not found in dynamic library");
+  }
+
+  int rccl_version;
+  ncclResult_t result = ncclGetVersion(&rccl_version);
+  if(result != ncclSuccess) {
+      return iree_make_status(IREE_STATUS_UNAVAILABLE,
+                          "ncclGetVersion() failed with error %d", result);
+  }
+
+  int major = 0;
+  int minor = 0;
+  int patch = 0;
+  if (rccl_version < 20000) {
+    major = rccl_version / 1000;
+    minor = (rccl_version % 1000) / 100;
+  } else {
+    major = rccl_version / 10000;
+    minor = (rccl_version % 10000) / 100;
+  }
+  patch = rccl_version % 100;
+  int required_minimum_version = NCCL_VERSION(NCCL_MAJOR, NCCL_MINOR, 0);
+  if (major != NCCL_MAJOR || rccl_version < required_minimum_version) {
+    return iree_make_status(
+        IREE_STATUS_UNAVAILABLE,
+        "NCCL version is %d.%d.%d, but >=%d.%d and <%d is required", major,
+        minor, patch, NCCL_MAJOR, NCCL_MINOR, NCCL_MAJOR + 1);
+  }
+
+  return iree_ok_status();
 }
 
 static iree_status_t iree_hal_rocm_rccl_dynamic_symbols_resolve_all(
@@ -127,7 +129,7 @@ iree_status_t iree_hal_rocm_rccl_dynamic_symbols_initialize(
 
 void iree_hal_rocm_rccl_dynamic_symbols_deinitialize(
     iree_hal_rocm_rccl_dynamic_symbols_t* syms) {
-  IREE_TRACE_ZONE_END(z0);
+  IREE_TRACE_ZONE_BEGIN(z0);
   iree_dynamic_library_release(syms->loader_library);
   memset(syms, 0, sizeof(*syms));
   IREE_TRACE_ZONE_END(z0);
